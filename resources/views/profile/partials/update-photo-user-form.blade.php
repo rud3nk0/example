@@ -10,71 +10,24 @@
 
         <form action="{{ route('profile.uploadPhoto') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+            <!-- <div class="form_group">
+                <input class="input__file" type="file" name="photo">
+            </div> -->
             <div class="form_group">
-                <input type="file" name="photo">
+                <label for="photo" class="custom-file-upload">
+                    <span>Choose a photo</span>
+                </label>
+                <input class="input__file" type="file" id="photo" name="photo">
             </div>
             <button class="btn" type="submit">Upload</button>
         </form>
     </header>
-
-    <!-- <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form> -->
 </section>
 
 
 <style>
     .image{
-        width: 150px;
+        width: 190px;
         height: 150px;
         border-radius: 100%;
     }
@@ -85,10 +38,47 @@
         height: 50px;
         background: transparent;
         border: 1px solid black;
+        color: white;
         
     }
     .btn:hover{
         background: white;
         transition: ease-in-out .4s;
+    }
+
+    /* Скрываем стандартное поле input[type="file"] */
+    .input__file {
+        display: none;
+    }
+
+    /* Кастомная кнопка */
+    .custom-file-upload {
+        display: inline-block;
+        background-color:rgb(31, 41, 55);  /* Зеленый фон */
+        border: 1px solid black;
+        color: white;  /* Белый текст */
+        padding: 10px 20px;  /* Отступы */
+        font-size: 16px;  /* Размер шрифта */
+        border-radius: 5px;  /* Скругленные углы */
+        cursor: pointer;  /* Курсор в виде руки */
+        transition: background-color 0.3s ease;  /* Плавное изменение фона */
+    }
+
+    .custom-file-upload:hover {
+        background-color: white;  /* Темно-зеленый при наведении */
+        color: black;
+    }
+
+    .custom-file-upload span {
+        font-weight: bold;  /* Сделаем текст жирным */
+    }
+
+    /* Для отображения имени выбранного файла (опционально) */
+    .input__file:focus + .custom-file-upload span {
+        color: #1d1d1d;
+    }
+
+    .input__file:focus {
+        outline: none;  /* Убираем обводку при фокусе */
     }
 </style>

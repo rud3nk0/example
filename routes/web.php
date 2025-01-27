@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +26,11 @@ Route::middleware('auth')->group(function ()
     //Route for upload photo
     Route::post('/profile/uploadPhoto', [ProfileController::class, 'uploadPhoto'])->name('profile.uploadPhoto');
     //End for photo
+
+    //Shop routeshop
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+    
+    //end shop route
 });
 
 require __DIR__.'/auth.php';
