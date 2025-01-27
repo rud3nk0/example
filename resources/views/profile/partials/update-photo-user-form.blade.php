@@ -1,23 +1,23 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
+            {{ __('Profile Photo') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Update your Photo profile") }}
         </p>
 
-        <div class="image__profile">
-            @isset($user->photo)
-                <div class="circle__image">
-                    <img class="image" src="{{ asset('storage/' . $user->photo) }}" alt="Profile Picture">
-                </div> 
-            @endisset
-        </div>
+        <form action="{{ route('profile.uploadPhoto') }}" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="form_group">
+                <input type="file" name="photo">
+            </div>
+            <button class="btn" type="submit">Upload</button>
+        </form>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    <!-- <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
 
@@ -68,15 +68,27 @@
                 >{{ __('Saved.') }}</p>
             @endif
         </div>
-    </form>
+    </form> -->
 </section>
 
 
 <style>
     .image{
-        
         width: 150px;
         height: 150px;
         border-radius: 100%;
+    }
+
+    .btn{
+        margin-top: 20px;
+        width: 100px;
+        height: 50px;
+        background: transparent;
+        border: 1px solid black;
+        
+    }
+    .btn:hover{
+        background: white;
+        transition: ease-in-out .4s;
     }
 </style>
