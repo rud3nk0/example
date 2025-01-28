@@ -39,9 +39,15 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-primary-button class="ms-3 btn_login">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
     </form>
 </x-guest-layout>
+
+<style>
+    .btn_login{
+        color: white!important;
+    }
+</style>
